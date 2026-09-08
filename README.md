@@ -13,8 +13,10 @@
 > 为红魔手机而生：风扇极速、充电分离、云控屏蔽、温控移除、振动增强、触控优化、充电加速等，一站式解决性能调校。
 <table>
   <tr>
-    <td><img width="350" alt="前端展示" src="https://github.com/user-attachments/assets/990ab9a2-f490-4c4c-8cf9-f6a1cf6e4056" /></td>
-    <td><img width="350" alt="前端展示2" src="https://github.com/user-attachments/assets/f0a6dd4e-030d-4741-b83a-b01f3727a85b" /></td>
+    <td><img width="350" alt="展示1" src="https://github.com/user-attachments/assets/d2f60b83-b1d7-4f62-9b48-cc03f717f0fb" />
+</td>
+    <td><img width="350" alt="展示2" src="https://github.com/user-attachments/assets/2f13d68a-3a92-40f5-9749-ab9b3c6631b5" />
+</td>
   </tr>
 </table>
 
@@ -50,7 +52,7 @@
 
 ## ⚙️ 配置
 
-模块目录下的 `config.txt`（重启生效）：
+模块目录下的 `config.txt`（部分功能需重启生效）：
 
 ```
 0=关闭 1=启用
@@ -78,6 +80,7 @@ FanExtreme/
 ├── customize.sh           # 安装时执行
 ├── service.sh             # 主守护进程
 ├── config.txt             # 配置文件
+├── post-fs-data.sh        # 温控配置挂载
 ├── update.json            # 在线更新描述
 │
 ├── lib/                   # 功能库
@@ -85,6 +88,7 @@ FanExtreme/
 │   ├── features.sh        # 各功能开关实现
 │   ├── status.sh          # 生成 WebUI 状态 JSON
 │   ├── perf.sh            # CPU/GPU 频率与锁频控制
+|   ├── diag.sh            # 运行日志生成
 │   └── loop.sh            # WebUI 命令循环
 │
 ├── webroot/               # WebUI 控制面板
