@@ -1,16 +1,18 @@
 #!/system/bin/sh
 ui_print "===================================="
-ui_print "  FanExtreme v3.1.9"
+ui_print "  FanExtreme v3.2.0"
 ui_print "===================================="
 INSTALLED_CONFIG="/data/adb/modules/FanExtreme/config.txt"
 NEW_CONFIG="$MODPATH/config.txt"
+INSTALLED_STATE="/data/adb/modules/FanExtreme/state.txt"
 rm -f "$MODPATH/.applied" "$MODPATH/.patch_log" "$MODPATH/.licensed"
 if [ -f "$INSTALLED_CONFIG" ]; then
-    ui_print "  📋 检测到已安装版本，保留现有配置"
+    ui_print "  🔍 检测到已安装版本，保留配置"
     cp -f "$INSTALLED_CONFIG" "$NEW_CONFIG"
 else
-    ui_print "  📋 全新安装，使用默认配置"
+    ui_print "  🆕 全新安装，使用默认配置"
 fi
+[ -f "$INSTALLED_STATE" ] && cp -f "$INSTALLED_STATE" "$MODPATH/state.txt"
 cfg() { grep -o "^$1=.*" "$NEW_CONFIG" 2>/dev/null | cut -d= -f2 | tr -d '\r' | tail -1; }
 DESC=""
 if [ "$(cfg '风扇极速')" = "1" ]; then
@@ -34,8 +36,6 @@ if [ "$(cfg '温控移除')" = "1" ]; then
     ui_print "  ✅ 温控移除"
     touch "$MODPATH/.thermal"
     DESC="$DESC 温控移除"
-    PLAT=$(getprop ro.board.platform 2>/dev/null)
-    [ "$PLAT" != "pineapple" ] && rm -f "$MODPATH/vendor/etc/thermal-engine.conf"
 else
     rm -f "$MODPATH/vendor/etc/thermal-engine.conf"
 fi
