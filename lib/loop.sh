@@ -88,17 +88,20 @@ webui_loop() {
           touch_mode)
             if [ "$value" = "perapp" ]; then
               echo "perapp" > "$TOUCH_MODE_FILE"
+              cfg_set '触控模式' perapp
               [ -e /proc/touchscreen/tp_report_rate ] && { echo 1 > /proc/touchscreen/tp_report_rate; echo 0 > /proc/touchscreen/play_game; echo 1 > /proc/touchscreen/follow_hand_level; }
               settings delete system touch_sampling_rate 2>/dev/null
               rm -f "$MODDIR/.touch_active"
             else
               rm -f "$TOUCH_MODE_FILE"
+              cfg_set '触控模式' global
               [ -f "$AUTO_TOUCH_FILE" ] && touch_boost
               rm -f "$MODDIR/.touch_active"
             fi
             ;;
           touch_apps)
             echo "$value" | tr "," "\n" | sed "s/^ *//;s/ *$//" > "$TOUCH_APPS_FILE"
+            cfg_set '触控应用列表' "$value"
             ;;
           touch_boost)
             if [ "$value" = "on" ]; then
